@@ -1,0 +1,9 @@
+target/
+uploads/
+*.mv.db
+*.trace.db
+.settings/
+.classpath
+.project
+.DS_Store
+*.class
