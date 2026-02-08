@@ -36,3 +36,28 @@ Spring Boot 기반의 유연한 게시판 관리 시스템입니다. 여러 개�
 - Maven 3.6+
 
 ### Build & Run
+```bash
+./mvnw spring-boot:run
+```
+또는 빌드 후 실행:
+```bash
+./mvnw clean package
+java -jar target/board-0.0.1-SNAPSHOT.jar
+```
+
+## 📂 프로젝트 구조
+
+- `controller/`: 웹 요청 처리 (BoardController, MainController 등)
+- `service/`: 비즈니스 로직 (PostService, BoardService)
+- `entity/`: 데이터베이스 테이블 매핑 (Board, Post, Attachment)
+- `repository/`: Spring Data JPA 인터페이스
+- `resources/`: 설정 파일 및 정적 리소스
+- `webapp/WEB-INF/views/`: JSP 뷰 템플릿
+
+![](image.png)  이모지 win + .  
+
+
+## 📝 라이센스
+
+이 프로젝트는 MIT 라이센스를 따라야 합니다.
+

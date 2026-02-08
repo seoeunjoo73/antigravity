@@ -1,0 +1,53 @@
+@startuml
+participant User
+participant BoardController
+participant BoardService
+participant PostService
+participant Post
+
+== 게시글 작성 (Create Post) ==
+User -> BoardController: request to create a post (POST /board/{boardId}/write)
+activate BoardController
+
+BoardController -> BoardService: getBoard(boardId)
+activate BoardService
+BoardController <- BoardService: board object
+deactivate BoardService
+
+BoardController -> PostService: createPost(board, title, content, author, file)
+activate PostService
+
+PostService -> Post: create new post object (Builder)
+activate Post
+PostService <- Post: post object
+deactivate Post
+
+PostService -> PostRepository: save(post)
+PostService <- PostRepository: saved post
+
+BoardController <- PostService: post object
+deactivate PostService
+
+User <- BoardController: redirect to board list
+deactivate BoardController
+
+== 게시글 목록 조회 (List Posts) ==
+User -> BoardController: request to list posts (GET /board/{boardId})
+activate BoardController
+
+BoardController -> BoardService: getBoard(boardId)
+activate BoardService
+BoardController <- BoardService: board object
+deactivate BoardService
+
+BoardController -> PostService: getPostsByBoard(boardId, pageable)
+activate PostService
+PostService -> PostRepository: findByBoardIdOrderByCreatedAtDesc(...)
+PostService <- PostRepository: Page<Post>
+BoardController <- PostService: Page<Post>
+deactivate PostService
+
+User <- BoardController: list of posts (board/list view)
+deactivate BoardController
+
+@enduml

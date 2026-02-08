@@ -1,0 +1,20 @@
+@startuml
+participant User
+participant BoardController
+participant BoardService
+participant Post
+
+User -> BoardController: request to create a post
+BoardController -> BoardService: addPost(post)
+activate BoardService
+BoardService -> Post: create new post object
+deactivate BoardService
+BoardController <- BoardService: confirmation message
+
+User -> BoardController: request to list posts
+BoardController -> BoardService: getPosts()
+activate BoardService
+BoardService -> List<Post>: fetch all posts
+deactivate BoardService
+BoardController <- BoardService: list of posts
+@enduml

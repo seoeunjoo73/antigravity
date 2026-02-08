@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+@startuml
+start
+
+:Initialize Project;
+if (Is Gradle project?) then (Yes)
+    :Create build.gradle file with dependencies;
+else (No)
+    :Use existing build.gradle file;
+endif
+
+:Modify Example.java;
+if (Add Redis session management logic?) then (Yes)
+    :Implement Redis session management logic in example.java;
+else (No)
+    :Continue without Redis session management;
+endif
+
+:Build the Project;
+if (Is Java project?) then (Yes)
+    :Run `./gradlew build`;
+else (No)
+    :Use other build command;
+endif
+
+:Run the Application;
+if (Is JAR file?) then (Yes)
+    :Execute using `java -cp build/libs/example-1.0-SNAPSHOT.jar Example`;
+else (No)
+    :Use other execution method;
+endif
+
+stop
+@enduml
+
+@enduml
